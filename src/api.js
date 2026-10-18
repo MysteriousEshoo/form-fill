@@ -4,15 +4,17 @@
 // ============================================================
 import { createClient } from '@supabase/supabase-js'
 
-const url = import.meta.env.VITE_SUPABASE_URL
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || "";
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || "";
+// const url = import.meta.env.VITE_SUPABASE_URL
+// const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 // Public https URL (deployed app). Iske baghair link localhost par banega.
 const configuredAppUrl = (import.meta.env.VITE_APP_URL || '').replace(/\/+$/, '')
 
-export const configured = Boolean(url && anonKey)
+export const configured = true;
 
 export const sb = configured
-  ? createClient(url, anonKey, {
+  ? createClient(supabaseUrl, supabaseAnonKey, {
       auth: { persistSession: true, autoRefreshToken: true },
     })
   : null
